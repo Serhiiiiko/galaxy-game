@@ -1,0 +1,10 @@
+asdasdasds<form action="{{ url }}" method="GET">
+	{% for key, value in form_data %}
+	<input type="hidden" name="{{ key }}" value="{{ value }}">
+	{% endfor %}
+	<div class="buttons">
+		<div class="pull-right">
+			<input type="submit" value="{{ button_confirm }}" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>

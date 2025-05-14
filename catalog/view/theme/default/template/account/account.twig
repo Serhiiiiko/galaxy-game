@@ -1,0 +1,191 @@
+{{ header }}
+<div id="account-account" class="container">
+  {#
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  #}
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="col-sm-12">{{ content_top }}
+{% if order_id %}
+<div class="alert alert-success" role="alert">
+  Заказ #{{order_id}} успешно оформлен! Ожидайте уведомление на почту!
+</div>
+{% endif %}
+    <div class="well">
+      <h2>{{ text_my_account }}</h2>
+      <form action="https://galaxy-game.ru/index.php?route=account/account/topUp" method="post" enctype="multipart/form-data" class="form-horizontal">
+        
+        <div class="form-group row">
+          {% if hide_all %}
+            Сожалеем, но в данный момент нет доступных способов оплаты. 
+          {% else %}    
+          <div class="col-sm-6">
+            <input type="text" name="total" id="input-amount" class="form-control" size="5" placeholder="Введите сумму">
+          </div>
+          <div class="col-sm-6">
+            <select name="payment" class="form-control" id="payment_selector">
+              <option value="">Выберите способ оплаты</option>
+              {#
+              {% if must_show %}
+              <option value="bank_form">Душанбе сити банк (МИР)</option>
+              {% endif %}
+              #}
+              
+              {#
+              <option value="bank_form">Душанбе сити банк (МИР)</option>
+              #}
+              <option value="morune">Morune</option>
+              {# <option value="skypay">SkyPay</option> #}
+              
+              <option value="lava">Lava</option>
+              {#
+              <option value="enot">Енот</option>
+              {% if must_show %}
+              <option value="antarex">Antarex</option>
+              {% endif %}
+              <option value="1pay">1pay.uz</option>
+              #}
+              {#
+              <option value="lava">Lava</option>
+              <option value="freekassa">Freekassa</option>
+              <option value="apicard">E-pay</option>
+              {% if must_show %}
+              <option value="payin">PAYIN (Карты)</option>
+              {% endif %}
+              {% if must_show %}
+              <option value="aifory">Aifory (Карты)</option>
+              {% endif %}
+              {% if must_show %}
+              <option value="bank_qr">Банк QR (Карты)</option>
+              {% endif %}
+              {% if must_show %}
+              <option value="royal">Рояль (в кустах)</option>
+              {% endif %}
+              #}
+              <option value="wata">Wata</option>
+              {# <option value="watacard">Оплата картой</option> #}
+              {# <option value="xpay">xPay</option> #}
+              <option value="watacard">Wata Мир</option>
+              <option value="nirvanapay">NirvanaPay</option>
+              
+              {% if must_show %}
+                <option value="platega">Platega QR</option>
+                <option value="platega3ds">Platega 3DS (НЕ ТРОГАТЬ)</option>
+
+                <option value="getpay">Getpay</option>
+              {% endif %}
+
+
+
+            </select>
+          </div>
+
+          {#
+          <div class="col-sm-6">
+            <select name="xpay" class="form-control">
+                <option value="0">Доступные банки:</option>
+                
+            </select>
+          </div>
+          #}
+
+          <div class="col-sm-6" style="display: none; margin-top: 20px;" id="card_info_wata">
+            <div style="border: 1px solid #4e3d91; border-radius: 5px; padding: 20px 15px; ">
+                <span style="font-size: 16px; text-align: center; display: block;">Введите данные владельца карты</span>
+                <input type="text" class="form-control" name="card_fio_paylink" placeholder="Имя и Фамилия" value="{# {{fio}} #}" {# onclick="navigator.clipboard.writeText('{{fio}}');alert('Владелец карты скопирован в буфер обмена');" #}>
+                {#
+                <input type="text" class="form-control" name="card_fio_paylink" placeholder="Имя_Фамилия" value="{{fio}}" onclick="navigator.clipboard.writeText('{{fio}}');alert('Владелец карты скопирован в буфер обмена');">
+                <input type="text" class="form-control" name="card_email_paylink" placeholder="email" value="{{email}}" onclick="navigator.clipboard.writeText('{{email}}');alert('Почта скопирована в буфер обмена');">
+                <input type="text" class="form-control" name="card_phone_paylink" placeholder="telephone" value="{{phone}}" onclick="navigator.clipboard.writeText('{{phone}}');alert('телефон скопирован в буфер обмена');">
+                #}
+                <input type="text" class="form-control" name="card_pan_paylink" placeholder="НОМЕР КАРТЫ" value="">
+                <input type="text" class="form-control" name="card_yy_paylink" placeholder="YY" value="">
+                <input type="text" class="form-control" name="card_mm_paylink" placeholder="MM" value="">
+                <input type="text" class="form-control" name="card_cvc_paylink" placeholder="CVV" value="">
+            </div>
+          </div>
+
+          <div class="col-sm-6" style="margin-top: 20px;"> 
+            <input type="submit" value="Пополнить" class="btn btn-primary">
+          </div>
+          {% endif %}
+        </div>
+        <div class="buttons clearfix">
+          
+        </div>
+      </form>
+    </div>
+<hr style="display: block;margin: 50px;">
+
+      <table>
+        <thead>
+          <th>№ заказа</th>
+          <th>Игра</th>
+          <th>Сумма</th>
+          <th>Дата заказа</th>
+          <th>Статус</th>
+        </thead>
+        {% for order in orders %}
+        <tr>
+          <td>{{order.order_id}}</td>
+          <td>{{order.product.name}}</td>
+          <td>{{order.total}}</td>
+          <td>{{order.date_added}}</td>
+          <td>{{order.status}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <a href="https://galaxy-game.ru/logout" class="list-group-item" style="background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); color: #fff; text-align: center;">Выход</a>
+      {{ content_bottom }}</div>
+    </div>
+</div>
+<style>
+  table {
+    width: 100%;
+    text-align: center;
+    background: #395c79;
+    border: 1px solid #777;
+}
+
+thead * {
+    font-weight: bolder;
+}
+
+table td, th {
+    padding: 5px 10px;
+    color: #fff;
+}
+
+tbody tr:nth-child(2n+1) {
+    background: #171721;
+}
+option {
+    background: #fff;
+}
+</style>
+
+{#
+<script type="text/javascript">
+    $("#payment_selector").on("change", function(){
+        if($("#payment_selector").val()=="watacard") {            
+            $("#card_info_wata").show();
+        }else{
+            $("#card_info_wata").hide();
+        }
+    });
+</script>
+#}
+{{ footer }}

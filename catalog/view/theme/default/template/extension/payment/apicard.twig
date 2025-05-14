@@ -1,0 +1,15 @@
+<form action="{{ url }}" method="POST">
+	{% for key, value in form_data %}
+	<input type="hidden" name="{{ key }}" value="{{ value }}">
+	{% endfor %}
+	<div class="buttons">
+		<div class="pull-right">
+			<input type="submit" value="Перейти к оплате" id="sendform" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#sendform').click();
+    }
+</script>

@@ -1,0 +1,36 @@
+{{ header }}
+<div id="account-account" class="container">
+<div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="col-sm-12">{{ content_top }}
+
+<form action="{{ url }}" method="POST">
+    {#
+    {% for key, value in form_data %}
+    <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endfor %}
+    #}
+    <textarea name="Request">{{ xml }}</textarea>
+    <div class="buttons">
+        <div class="pull-right">
+            <input type="submit" value="Перейти к оплате" id="sendform" class="btn btn-primary"/>
+        </div>
+    </div>
+</form>
+
+{{ content_bottom }}
+</div>
+</div>
+
+<script type="text/javascript">
+    
+        $('#sendform').click();
+    
+</script>
+{{ footer }}
